@@ -1,4 +1,4 @@
-#coding=utf-8
+
 #创建单节点
 class Node():
 	def __init__(self,elem_):
