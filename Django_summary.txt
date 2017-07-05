@@ -1,0 +1,87 @@
+Django:
+高扩展性
+向后兼容
+低耦合、高内聚
+
+项目的入口：manage.py
+项目的配置：test1
+项目的开发：自定义应用
+
+虚拟环境：workon,mkvirtualenv,rmvirtualenv,deactivate
+			pip list
+			pip install
+django的命令：django-admin startproject
+			python manage.py startapp +应用名称
+			# 注册
+			python manage.py makemigrations
+			python manage.py migrate
+			python manage.py runserver
+
+			python manage.py createsuperuser
+			# 创建超级管理员
+
+# admin的使用：
+		admin.py:
+			admin.site.register(模型类，admin类:显示的样子)
+
+字符串.encode('utf-8')中文设置字符
+
+
+************************************
+开发流程：
+	step1：创建虚拟环境
+	step2：安装Django包 pip install django==1.8.2
+	step3: 创建项目
+	step4：创建应用
+	step5：在models.py中定义模型类（关系型数据库）
+	step6：定义视图，request，httpresponse
+	step7：配置URL，两个参数（正则，处理函数；视图的名字）
+	step8：创建模板，在项目目录下，setting里的dir
+
+
+
+*********************************
+BookInfo
+HeroInfo
+		book = models.Foreignkey(BookInfo)
+
+英雄对象：hero.book.id
+		  hero.book_id
+图书对象：book.heroinfo_set
+
+
+管理器是模型类的属性，用于将对象与数据表映射
+缓存：
+query = BookInfo.objects.all()
+for ... in query[0:10]
+for ... in query[11:20]
+for ... in query
+
+ORM->Manager
+查询：惰性执行、缓存
+values:将列表转为字典，jason
+filter(字段名称__运算符=‘值’)
+Q()|Q()逻辑或
+字段比较：F
+关联查询：
+		查询英雄的名字姓郭的图书
+		BookInfo
+		HeroInfo:book
+
+		BookInfo.objects.filter(heroinfo__hname__startswith='郭')
+
+		book.heroinfo_set
+		hero.book
+
+模板：
+		变量{{}}、标签{%%}、过滤器|、注释{##}
+		继承：block、extends，block名称
+		转义：|safe,{%autoescape off%}
+		csrf、csrf_token验证码
+
+******************************************
+
+部署：	
+		uwsgi
+		http = 127.0.0.1:8000
+		socket:nginx
